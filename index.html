@@ -5,105 +5,114 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KingScripts</title>
     <style>
-        /* Ultra-Modern Dark Theme */
+        /* Ultra-Modern Dark Theme with Advanced Animations */
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: #fff;
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
         }
 
         header {
             background: rgba(0, 0, 0, 0.7);
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             position: relative;
+            overflow: hidden;
         }
 
         header h1 {
             margin: 0;
-            font-size: 3rem;
+            font-size: 4rem;
             color: #ff6f61;
-            animation: fadeIn 2s ease-in-out;
+            animation: fadeIn 2s ease-in-out, float 3s ease-in-out infinite;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
         header h1 .crown {
-            font-size: 2.5rem;
-            margin-right: 10px;
+            font-size: 3rem;
+            margin-right: 15px;
             color: #ffd700; /* Gold color for the crown */
+            animation: spin 5s linear infinite;
         }
 
         header p {
-            margin: 10px 0 0;
-            font-size: 1.2rem;
+            margin: 15px 0 0;
+            font-size: 1.5rem;
             color: #bbb;
             animation: fadeIn 3s ease-in-out;
         }
 
         main {
-            padding: 20px;
+            padding: 40px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .script-card {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
 
         .script-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
         }
 
         .script-card h3 {
-            margin: 0 0 10px;
-            font-size: 1.8rem;
+            margin: 0 0 15px;
+            font-size: 2.2rem;
             color: #ff6f61;
         }
 
         .script-card .language {
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             color: #bbb;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
 
         .script-card pre {
             background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 10px;
+            padding: 20px;
+            border-radius: 15px;
             overflow-x: auto;
             color: #fff;
             font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            line-height: 1.5;
         }
 
         .buttons {
             display: flex;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 15px;
+            margin-top: 20px;
         }
 
         .copy-button, .view-raw-button {
             background: #ff6f61;
             color: #fff;
             border: none;
-            padding: 10px 15px;
-            border-radius: 10px;
+            padding: 12px 18px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background 0.3s ease;
+            font-size: 1.1rem;
+            transition: background 0.3s ease, transform 0.2s ease;
         }
 
         .copy-button:hover, .view-raw-button:hover {
             background: #ff3b2f;
+            transform: scale(1.05);
         }
 
         .copy-button.copied {
@@ -128,22 +137,58 @@
             to { opacity: 1; }
         }
 
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Particle Background Effect */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            animation: floatParticle 5s infinite ease-in-out;
+        }
+
+        @keyframes floatParticle {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(20px); }
+        }
+
         /* Responsive Design */
         @media (max-width: 600px) {
             header h1 {
-                font-size: 2rem;
+                font-size: 2.5rem;
             }
 
             header h1 .crown {
-                font-size: 1.8rem;
+                font-size: 2rem;
             }
 
             header p {
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
 
             .script-card h3 {
-                font-size: 1.5rem;
+                font-size: 1.8rem;
+            }
+
+            .script-card pre {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -154,6 +199,9 @@
             <span class="crown">👑</span> KingScripts
         </h1>
         <p>Your ultimate source for ready-to-use scripts!</p>
+        <div class="particles">
+            <!-- Particle elements will be generated by JavaScript -->
+        </div>
     </header>
     <main>
         <div id="scripts-container"></div>
@@ -228,8 +276,26 @@
             }
         }
 
-        // Display scripts when the page loads
-        document.addEventListener('DOMContentLoaded', displayScripts);
+        // Function to create particle background effect
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.width = `${Math.random() * 5 + 2}px`;
+                particle.style.height = particle.style.width;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDuration = `${Math.random() * 5 + 3}s`;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Display scripts and create particles when the page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            displayScripts();
+            createParticles();
+        });
     </script>
 </body>
 </html>
