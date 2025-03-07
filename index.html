@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KingScripts</title>
     <style>
-        /* Modern Dark Theme */
+        /* Ultra-Modern Dark Theme */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1e1e2f, #2a2a40);
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
             color: #fff;
             margin: 0;
             padding: 0;
@@ -16,67 +16,70 @@
 
         header {
             background: rgba(0, 0, 0, 0.7);
-            padding: 20px;
+            padding: 40px 20px;
             text-align: center;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         header h1 {
             margin: 0;
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: #ff6f61;
+            animation: fadeIn 2s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        header h1 .crown {
+            font-size: 2.5rem;
+            margin-right: 10px;
+            color: #ffd700; /* Gold color for the crown */
         }
 
         header p {
-            margin: 5px 0 0;
+            margin: 10px 0 0;
             font-size: 1.2rem;
             color: #bbb;
+            animation: fadeIn 3s ease-in-out;
         }
 
         main {
             padding: 20px;
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
-        }
-
-        #search-bar {
-            width: 100%;
-            padding: 10px;
-            font-size: 1rem;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-
-        #search-bar::placeholder {
-            color: #888;
         }
 
         .script-card {
             background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
         .script-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
         }
 
         .script-card h3 {
             margin: 0 0 10px;
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             color: #ff6f61;
+        }
+
+        .script-card .language {
+            font-size: 0.9rem;
+            color: #bbb;
+            margin-bottom: 15px;
         }
 
         .script-card pre {
             background: rgba(0, 0, 0, 0.3);
-            padding: 10px;
-            border-radius: 5px;
+            padding: 15px;
+            border-radius: 10px;
             overflow-x: auto;
             color: #fff;
             font-family: 'Courier New', monospace;
@@ -86,8 +89,8 @@
             background: #ff6f61;
             color: #fff;
             border: none;
-            padding: 8px 12px;
-            border-radius: 5px;
+            padding: 10px 15px;
+            border-radius: 10px;
             cursor: pointer;
             font-size: 1rem;
             transition: background 0.3s ease;
@@ -105,10 +108,20 @@
             content: ' ✓';
         }
 
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* Responsive Design */
         @media (max-width: 600px) {
             header h1 {
                 font-size: 2rem;
+            }
+
+            header h1 .crown {
+                font-size: 1.8rem;
             }
 
             header p {
@@ -116,18 +129,19 @@
             }
 
             .script-card h3 {
-                font-size: 1.2rem;
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>KingScripts</h1>
+        <h1>
+            <span class="crown">👑</span> KingScripts
+        </h1>
         <p>Your ultimate source for ready-to-use scripts!</p>
     </header>
     <main>
-        <input type="text" id="search-bar" placeholder="Search for scripts...">
         <div id="scripts-container"></div>
     </main>
 
@@ -150,6 +164,10 @@
                     const scriptName = document.createElement('h3');
                     scriptName.textContent = script.name;
 
+                    const scriptLanguage = document.createElement('div');
+                    scriptLanguage.className = 'language';
+                    scriptLanguage.textContent = `Language: ${script.language}`;
+
                     const scriptCode = document.createElement('pre');
                     scriptCode.textContent = script.code;
 
@@ -168,6 +186,7 @@
                     });
 
                     scriptCard.appendChild(scriptName);
+                    scriptCard.appendChild(scriptLanguage);
                     scriptCard.appendChild(scriptCode);
                     scriptCard.appendChild(copyButton);
 
@@ -178,22 +197,6 @@
                 scriptsContainer.innerHTML = '<p>Failed to load scripts. Please try again later.</p>';
             }
         }
-
-        // Search functionality
-        const searchBar = document.getElementById('search-bar');
-        searchBar.addEventListener('input', () => {
-            const query = searchBar.value.toLowerCase();
-            const scriptCards = document.querySelectorAll('.script-card');
-
-            scriptCards.forEach(card => {
-                const name = card.querySelector('h3').textContent.toLowerCase();
-                if (name.includes(query)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
 
         // Display scripts when the page loads
         document.addEventListener('DOMContentLoaded', displayScripts);
