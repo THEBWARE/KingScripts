@@ -85,7 +85,13 @@
             font-family: 'Courier New', monospace;
         }
 
-        .copy-button {
+        .buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .copy-button, .view-raw-button {
             background: #ff6f61;
             color: #fff;
             border: none;
@@ -96,7 +102,7 @@
             transition: background 0.3s ease;
         }
 
-        .copy-button:hover {
+        .copy-button:hover, .view-raw-button:hover {
             background: #ff3b2f;
         }
 
@@ -106,6 +112,14 @@
 
         .copy-button.copied::after {
             content: ' ✓';
+        }
+
+        .view-raw-button {
+            background: #007bff;
+        }
+
+        .view-raw-button:hover {
+            background: #0056b3;
         }
 
         /* Animations */
@@ -171,6 +185,9 @@
                     const scriptCode = document.createElement('pre');
                     scriptCode.textContent = script.code;
 
+                    const buttonsContainer = document.createElement('div');
+                    buttonsContainer.className = 'buttons';
+
                     const copyButton = document.createElement('button');
                     copyButton.className = 'copy-button';
                     copyButton.textContent = 'Copy';
@@ -185,10 +202,23 @@
                             .catch(() => alert('Failed to copy!'));
                     });
 
+                    buttonsContainer.appendChild(copyButton);
+
+                    // Add "View Raw" button if viewRaw is "yes"
+                    if (script.viewRaw === "yes") {
+                        const viewRawButton = document.createElement('button');
+                        viewRawButton.className = 'view-raw-button';
+                        viewRawButton.textContent = 'View Raw';
+                        viewRawButton.addEventListener('click', () => {
+                            window.open(script.rawUrl, '_blank');
+                        });
+                        buttonsContainer.appendChild(viewRawButton);
+                    }
+
                     scriptCard.appendChild(scriptName);
                     scriptCard.appendChild(scriptLanguage);
                     scriptCard.appendChild(scriptCode);
-                    scriptCard.appendChild(copyButton);
+                    scriptCard.appendChild(buttonsContainer);
 
                     scriptsContainer.appendChild(scriptCard);
                 });
