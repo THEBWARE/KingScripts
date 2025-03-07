@@ -5,5 +5,12 @@
         "language": "Lua",
         "viewRaw": "yes",
         "rawUrl": "https://kingscripts-three.vercel.app/PublicScripts/RedzHubBloxFruits.lua"
+    },
+    {
+        "name": "Cevor Murder Mystery 2",
+        "code": "getgenv().autocopykey = false -- For Copying link set to true if you already have the link or the key copied and you wanna rerun the script set it to false\nloadstring(game:HttpGet(\"https://raw.githubusercontent.com/THEBWARE/-/refs/heads/main/CevorMM2V8.3.lua\", true))()",
+        "language": "Lua",
+        "viewRaw": "yes",
+        "rawUrl": "https://kingscripts-three.vercel.app/PublicScripts/CevorMM2.lua"
     }
 ]
