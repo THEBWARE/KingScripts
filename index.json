@@ -12,5 +12,12 @@
         "language": "Lua",
         "viewRaw": "yes",
         "rawUrl": "https://kingscripts-three.vercel.app/PublicScripts/Infinite%20Yield.lua"
+    },
+    {
+        "name": "Click To Tween",
+        "code": "loadstring(game:HttpGet(\"https://coolkingscripts.vercel.app/PublicScripts/ClickToTween.lua/\"))()",
+        "language": "Lua",
+        "viewRaw": "yes",
+        "rawUrl": "https://coolkingscripts.vercel.app/PublicScripts/ClickToTween.lua/"
     }
 ]
