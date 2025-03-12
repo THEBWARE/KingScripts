@@ -4,20 +4,23 @@
         "code": "loadstring(game:HttpGet(\"https://raw.githubusercontent.com/realredz/BloxFruits/refs/heads/main/Source.lua\"))()",
         "language": "Lua",
         "viewRaw": "yes",
-        "rawUrl": "https://kingscripts-three.vercel.app/PublicScripts/RedzHubBloxFruits.lua"
+        "rawUrl": "https://kingscripts-three.vercel.app/PublicScripts/RedzHubBloxFruits.lua",
+        "whichGameFor": "Blox Fruits"
     },
     {
         "name": "Infinite Yield",
         "code": "loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()",
         "language": "Lua",
         "viewRaw": "yes",
-        "rawUrl": "https://kingscripts-three.vercel.app/PublicScripts/Infinite%20Yield.lua"
+        "rawUrl": "https://kingscripts-three.vercel.app/PublicScripts/Infinite%20Yield.lua",
+        "whichGameFor": "Universal"
     },
     {
         "name": "Click To Tween (Mainly to complete blox fruits draco V4 Traial)",
         "code": "loadstring(game:HttpGet(\"https://coolkingscripts.vercel.app/PublicScripts/ClickToTween.lua/\"))()",
         "language": "Lua",
         "viewRaw": "yes",
-        "rawUrl": "https://coolkingscripts.vercel.app/PublicScripts/ClickToTween.lua/"
+        "rawUrl": "https://coolkingscripts.vercel.app/PublicScripts/ClickToTween.lua/",
+        "whichGameFor": "Universal(Mainly Blox Fruits)"
     }
 ]
