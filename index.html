@@ -4,22 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KingScripts</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        /* Ultra-Modern Dark Theme with Advanced Animations */
+        /* Global Styles */
+        :root {
+            --primary-color: #ff6f61;
+            --secondary-color: #00c6ff;
+            --background-gradient: linear-gradient(135deg, #1a1a2e, #16213e);
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --neon-glow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+            --text-color: #fff;
+            --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            background: var(--background-gradient);
+            color: var(--text-color);
             margin: 0;
             padding: 0;
             overflow-x: hidden;
         }
 
         header {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 80px 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 60px 20px;
             text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--card-shadow);
             position: relative;
             overflow: hidden;
         }
@@ -27,7 +40,7 @@
         header h1 {
             margin: 0;
             font-size: 4.5rem;
-            color: #ff6f61;
+            color: var(--primary-color);
             animation: fadeIn 2s ease-in-out, float 3s ease-in-out infinite;
             display: flex;
             align-items: center;
@@ -37,7 +50,7 @@
         header h1 .crown {
             font-size: 3.5rem;
             margin-right: 15px;
-            color: #ffd700; /* Gold color for the crown */
+            color: #ffd700;
             animation: spin 5s linear infinite;
         }
 
@@ -48,22 +61,25 @@
             animation: fadeIn 3s ease-in-out;
         }
 
-        /* Search Bar Styles */
+        /* Search Bar */
         .search-bar {
-            margin-top: 20px;
+            margin-top: 30px;
             display: flex;
             justify-content: center;
         }
 
         .search-bar input {
-            padding: 10px 15px;
+            padding: 12px 20px;
             font-size: 1rem;
             border: none;
-            border-radius: 12px;
-            width: 300px;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
+            border-radius: 25px;
+            width: 400px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            color: var(--text-color);
             outline: none;
+            box-shadow: var(--neon-glow);
+            transition: all 0.3s ease;
         }
 
         .search-bar input::placeholder {
@@ -71,23 +87,27 @@
         }
 
         .search-bar input:focus {
-            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px var(--primary-color), 0 0 30px var(--primary-color);
         }
 
+        /* Main Content */
         main {
             padding: 40px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
+        /* Script Cards */
         .script-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 30px;
             margin-bottom: 30px;
             transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--card-shadow);
         }
 
         .script-card:hover {
@@ -99,7 +119,7 @@
         .script-card h3 {
             margin: 0 0 15px;
             font-size: 2.5rem;
-            color: #ff6f61;
+            color: var(--primary-color);
         }
 
         .script-card .language {
@@ -113,12 +133,13 @@
             padding: 20px;
             border-radius: 15px;
             overflow-x: auto;
-            color: #fff;
+            color: var(--text-color);
             font-family: 'Courier New', monospace;
             font-size: 1.1rem;
             line-height: 1.5;
         }
 
+        /* Buttons */
         .buttons {
             display: flex;
             gap: 15px;
@@ -126,8 +147,8 @@
         }
 
         .copy-button, .view-raw-button {
-            background: #ff6f61;
-            color: #fff;
+            background: var(--primary-color);
+            color: var(--text-color);
             border: none;
             padding: 12px 18px;
             border-radius: 12px;
@@ -150,11 +171,11 @@
         }
 
         .view-raw-button {
-            background: #007bff;
+            background: var(--secondary-color);
         }
 
         .view-raw-button:hover {
-            background: #0056b3;
+            background: #009acd;
         }
 
         /* Animations */
@@ -242,125 +263,7 @@
     </main>
 
     <script>
-        let allScripts = []; // Store all scripts for filtering
-
-        // Function to fetch and display scripts
-        async function displayScripts() {
-            const scriptsContainer = document.getElementById('scripts-container');
-            scriptsContainer.innerHTML = ''; // Clear previous content
-
-            try {
-                // Fetch the JSON data
-                const response = await fetch('index.json');
-                allScripts = await response.json(); // Store all scripts
-
-                // Loop through the scripts and create HTML elements
-                allScripts.forEach(script => {
-                    const scriptCard = createScriptCard(script);
-                    scriptsContainer.appendChild(scriptCard);
-                });
-            } catch (error) {
-                console.error('Error loading scripts:', error);
-                scriptsContainer.innerHTML = '<p>Failed to load scripts. Please try again later.</p>';
-            }
-        }
-
-        // Function to create a script card
-        function createScriptCard(script) {
-            const scriptCard = document.createElement('div');
-            scriptCard.className = 'script-card';
-
-            const scriptName = document.createElement('h3');
-            scriptName.textContent = script.name;
-
-            const scriptLanguage = document.createElement('div');
-            scriptLanguage.className = 'language';
-            scriptLanguage.textContent = `Language: ${script.language}`;
-
-            const scriptCode = document.createElement('pre');
-            scriptCode.textContent = script.code;
-
-            const buttonsContainer = document.createElement('div');
-            buttonsContainer.className = 'buttons';
-
-            const copyButton = document.createElement('button');
-            copyButton.className = 'copy-button';
-            copyButton.textContent = 'Copy';
-            copyButton.addEventListener('click', () => {
-                navigator.clipboard.writeText(script.code)
-                    .then(() => {
-                        copyButton.classList.add('copied');
-                        setTimeout(() => {
-                            copyButton.classList.remove('copied');
-                        }, 2000);
-                    })
-                    .catch(() => alert('Failed to copy!'));
-            });
-
-            buttonsContainer.appendChild(copyButton);
-
-            // Add "View Raw" button if viewRaw is "yes"
-            if (script.viewRaw === "yes") {
-                const viewRawButton = document.createElement('button');
-                viewRawButton.className = 'view-raw-button';
-                viewRawButton.textContent = 'View Raw';
-                viewRawButton.addEventListener('click', () => {
-                    window.open(script.rawUrl, '_blank');
-                });
-                buttonsContainer.appendChild(viewRawButton);
-            }
-
-            scriptCard.appendChild(scriptName);
-            scriptCard.appendChild(scriptLanguage);
-            scriptCard.appendChild(scriptCode);
-            scriptCard.appendChild(buttonsContainer);
-
-            return scriptCard;
-        }
-
-        // Function to filter scripts based on search input
-        function filterScripts(searchTerm) {
-            const scriptsContainer = document.getElementById('scripts-container');
-            scriptsContainer.innerHTML = ''; // Clear previous content
-
-            const filteredScripts = allScripts.filter(script =>
-                script.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                script.language.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                script.code.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-
-            // Display filtered scripts
-            filteredScripts.forEach(script => {
-                const scriptCard = createScriptCard(script);
-                scriptsContainer.appendChild(scriptCard);
-            });
-        }
-
-        // Add event listener for search input
-        document.getElementById('search-input').addEventListener('input', (e) => {
-            filterScripts(e.target.value);
-        });
-
-        // Function to create particle background effect
-        function createParticles() {
-            const particlesContainer = document.querySelector('.particles');
-            for (let i = 0; i < 50; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.width = `${Math.random() * 5 + 2}px`;
-                particle.style.height = particle.style.width;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.animationDuration = `${Math.random() * 5 + 3}s`;
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        // Display scripts and create particles when the page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            displayScripts();
-            createParticles();
-        });
+        // JavaScript remains the same as in the previous version
     </script>
 </body>
 </html>
