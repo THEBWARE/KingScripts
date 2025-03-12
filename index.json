@@ -14,7 +14,7 @@
         "rawUrl": "https://kingscripts-three.vercel.app/PublicScripts/Infinite%20Yield.lua"
     },
     {
-        "name": "Click To Tween",
+        "name": "Click To Tween (Mainly to complete blox fruits draco V4 Traial)",
         "code": "loadstring(game:HttpGet(\"https://coolkingscripts.vercel.app/PublicScripts/ClickToTween.lua/\"))()",
         "language": "Lua",
         "viewRaw": "yes",
