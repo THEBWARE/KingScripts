@@ -22,5 +22,13 @@
         "viewRaw": "yes",
         "rawUrl": "https://coolkingscripts.vercel.app/PublicScripts/ClickToTween.lua/",
         "whichGameFor": "Universal(Mainly Blox Fruits)"
+    },
+    {
+        "name": "Yarhm Hub",
+        "code": "loadstring(game:HttpGet(\"https://coolkingscripts.vercel.app/PublicScripts/YarhmHub.lua\"))()",
+        "language": "Lua",
+        "viewRaw": "yes",
+        "rawUrl": "https://coolkingscripts.vercel.app/PublicScripts/YarhmHub.lua",
+        "whichGameFor": "MM2 and Flee The Facility"
     }
 ]
