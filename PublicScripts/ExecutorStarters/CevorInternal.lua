@@ -1,15 +1,11 @@
--- LocalScript (Place this in StarterPlayerScripts or StarterGui)
-
--- Check if the GUI already exists
 if game.Players.LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("ScriptExecutor") then
-    return -- Exit the script if another instance is found
+    return
 end
 
--- Create the GUI
 local player = game.Players.LocalPlayer
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "ScriptExecutor"
-screenGui.Parent = player:WaitForChild("PlayerGui") -- Parent to PlayerGui
+screenGui.Parent = player:WaitForChild("PlayerGui")
 
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0.3, 0, 0.4, 0)
@@ -17,19 +13,18 @@ frame.Position = UDim2.new(0.35, 0, 0.3, 0)
 frame.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
 frame.BorderSizePixel = 0
 frame.Visible = false
-frame.Active = true -- Allows the frame to be interactable
-frame.Draggable = true -- Makes the frame draggable
+frame.Active = true
+frame.Draggable = true
 frame.Parent = screenGui
 
--- Replace the tabsContainer Frame with a ScrollingFrame
 local tabsContainer = Instance.new("ScrollingFrame")
 tabsContainer.Size = UDim2.new(1, 0, 0.1, 0)
 tabsContainer.Position = UDim2.new(0, 0, 0, 0)
 tabsContainer.BackgroundColor3 = Color3.new(0.15, 0.15, 0.15)
 tabsContainer.BorderSizePixel = 0
-tabsContainer.ScrollBarThickness = 8 -- Set the scrollbar thickness
+tabsContainer.ScrollBarThickness = 8
 tabsContainer.ScrollBarImageColor3 = Color3.new(0.3, 0.3, 0.3)
-tabsContainer.CanvasSize = UDim2.new(0, 0, 0, 0) -- This will be updated dynamically
+tabsContainer.CanvasSize = UDim2.new(0, 0, 0, 0)
 tabsContainer.Parent = frame
 
 local tabsList = Instance.new("UIListLayout")
@@ -72,24 +67,20 @@ addTabButton.Parent = tabsContainer
 
 local tabs = {}
 local currentTab = nil
-local tabCounter = 1 -- Counter for sequential tab naming
+local tabCounter = 1
 
--- Minimum width for each tab (to prevent them from becoming too small)
-local MIN_TAB_WIDTH = 50 -- Minimum width in pixels
+local MIN_TAB_WIDTH = 50
 
--- Function to update the size of each tab
 local function updateTabSizes()
-    local totalTabs = #tabs + 1 -- Include the addTabButton
+    local totalTabs = #tabs + 1
     local containerWidth = tabsContainer.AbsoluteSize.X
     local totalPadding = tabsList.Padding.Offset * (totalTabs - 1)
     local availableWidth = containerWidth - totalPadding
-    local tabWidth = math.max(MIN_TAB_WIDTH, availableWidth / totalTabs) -- Ensure tabs don't get too small
+    local tabWidth = math.max(MIN_TAB_WIDTH, availableWidth / totalTabs)
 
-    -- Resize all tabs
     for _, tab in ipairs(tabs) do
         tab.button.Size = UDim2.new(0, tabWidth, 1, 0)
-        -- Update the tab label text to fit within the new width
-        local maxTextLength = math.floor(tabWidth / 10) -- Adjust this value as needed
+        local maxTextLength = math.floor(tabWidth / 10)
         if #tab.title > maxTextLength then
             tab.label.Text = string.sub(tab.title, 1, maxTextLength) .. "..."
         else
@@ -97,23 +88,21 @@ local function updateTabSizes()
         end
     end
 
-    -- Resize the addTabButton
     addTabButton.Size = UDim2.new(0, tabWidth, 1, 0)
 end
 
--- Function to update the CanvasSize of the ScrollingFrame
 local function updateTabsContainerSize()
     local totalWidth = 0
     for _, tab in ipairs(tabs) do
         totalWidth = totalWidth + tab.button.AbsoluteSize.X + tabsList.Padding.Offset
     end
-    totalWidth = totalWidth + addTabButton.AbsoluteSize.X -- Include the addTabButton width
+    totalWidth = totalWidth + addTabButton.AbsoluteSize.X
     tabsContainer.CanvasSize = UDim2.new(0, totalWidth, 0, 0)
 end
 
 local function createTab(title)
     local tabButton = Instance.new("TextButton")
-    tabButton.Size = UDim2.new(0.2, 0, 1, 0) -- Initial size, will be updated
+    tabButton.Size = UDim2.new(0.2, 0, 1, 0)
     tabButton.BackgroundColor3 = Color3.new(0.2, 0.2, 0.2)
     tabButton.TextColor3 = Color3.new(1, 1, 1)
     tabButton.Text = ""
@@ -146,7 +135,6 @@ local function createTab(title)
 
     table.insert(tabs, tab)
 
-    -- Update tab sizes and container size
     updateTabSizes()
     updateTabsContainerSize()
 
@@ -180,14 +168,12 @@ end
 addTabButton.MouseButton1Click:Connect(function()
     local tabTitle = "New Tab " .. tabCounter
     createTab(tabTitle)
-    tabCounter = tabCounter + 1 -- Increment the counter for the next tab
+    tabCounter = tabCounter + 1
 end)
 
--- Create the first tab
 createTab("New Tab " .. tabCounter)
-tabCounter = tabCounter + 1 -- Increment the counter for the next tab
+tabCounter = tabCounter + 1
 
--- Function to toggle the GUI visibility
 local function toggleGUI()
     frame.Visible = not frame.Visible
     if frame.Visible then
@@ -195,7 +181,6 @@ local function toggleGUI()
     end
 end
 
--- Function to execute the script
 local function executeScript()
     local scriptText = textBox.Text
     local success, errorMessage = pcall(function()
@@ -206,22 +191,18 @@ local function executeScript()
     end
 end
 
--- Connect the execute button to the executeScript function
 executeButton.MouseButton1Click:Connect(executeScript)
 
--- Connect the clear button to clear the text
 clearButton.MouseButton1Click:Connect(function()
     textBox.Text = ""
 end)
 
--- Listen for the Insert key press
 game:GetService("UserInputService").InputBegan:Connect(function(input, gameProcessed)
     if input.KeyCode == Enum.KeyCode.Insert and not gameProcessed then
         toggleGUI()
     end
 end)
 
--- Make the entire frame draggable
 local isDragging = false
 local dragStartPos = nil
 local frameStartPos = nil
