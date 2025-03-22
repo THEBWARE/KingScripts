@@ -4,7 +4,7 @@
 local player = game.Players.LocalPlayer
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "ScriptExecutor"
-screenGui.Parent = player.PlayerGui
+screenGui.Parent = player:WaitForChild("PlayerGui") -- Parent to PlayerGui
 
 local frame = Instance.new("Frame")
 frame.Size = UDim2.new(0.3, 0, 0.4, 0)
