@@ -1,5 +1,10 @@
 -- LocalScript (Place this in StarterPlayerScripts or StarterGui)
 
+-- Check if the GUI already exists
+if game.Players.LocalPlayer:FindFirstChild("PlayerGui"):FindFirstChild("ScriptExecutor") then
+    return -- Exit the script if another instance is found
+end
+
 -- Create the GUI
 local player = game.Players.LocalPlayer
 local screenGui = Instance.new("ScreenGui")
