@@ -30,5 +30,13 @@
         "viewRaw": "yes",
         "rawUrl": "https://coolkingscripts.vercel.app/PublicScripts/YarhmHub.lua",
         "whichGameFor": "MM2 and Flee The Facility"
+    },
+    {
+        "name": "Cevor Internal",
+        "code": "loadstring(game:HttpGet(\"https://coolkingscripts.vercel.app/PublicScripts/ExecutorStarters/CevorInternal.lua"))()",
+        "language": "Lua",
+        "viewRaw": "yes",
+        "rawUrl": "https://coolkingscripts.vercel.app/PublicScripts/ExecutorStarters/CevorInternal.lua",
+        "whichGameFor": "Universal"
     }
 ]
