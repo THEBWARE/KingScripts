@@ -16,12 +16,12 @@
         "whichGameFor": "Universal"
     },
     {
-        "name": "Click To Tween (Mainly to complete blox fruits draco V4 Traial)",
-        "code": "loadstring(game:HttpGet(\"https://coolkingscripts.vercel.app/PublicScripts/ClickToTween.lua/\"))()",
+        "name": "Click To Tween (Mainly to complete Blox Fruits Draco V4 Trial)",
+        "code": "loadstring(game:HttpGet(\"https://coolkingscripts.vercel.app/PublicScripts/ClickToTween.lua\"))()",
         "language": "Lua",
         "viewRaw": "yes",
-        "rawUrl": "https://coolkingscripts.vercel.app/PublicScripts/ClickToTween.lua/",
-        "whichGameFor": "Universal(Mainly Blox Fruits)"
+        "rawUrl": "https://coolkingscripts.vercel.app/PublicScripts/ClickToTween.lua",
+        "whichGameFor": "Universal (Mainly Blox Fruits)"
     },
     {
         "name": "Yarhm Hub",
@@ -33,7 +33,7 @@
     },
     {
         "name": "Cevor Internal",
-        "code": "loadstring(game:HttpGet(\"https://coolkingscripts.vercel.app/PublicScripts/ExecutorStarters/CevorInternal.lua"))()",
+        "code": "loadstring(game:HttpGet(\"https://coolkingscripts.vercel.app/PublicScripts/ExecutorStarters/CevorInternal.lua\"))()",
         "language": "Lua",
         "viewRaw": "yes",
         "rawUrl": "https://coolkingscripts.vercel.app/PublicScripts/ExecutorStarters/CevorInternal.lua",
